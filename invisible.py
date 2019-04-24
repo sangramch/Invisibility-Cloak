@@ -19,18 +19,18 @@ while(True):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) 
 
     #Color detection
-    sensitivity=10
-    lower_green=(60 - sensitivity, 75, 50)
-    upper_green=(60 + sensitivity, 255, 255)
-    #mask 1 to detect green color and filter out green region
-    mask=cv2.inRange(hsv,lower_green,upper_green)
-    #inverse mask to keep regions with green and filter out rest
+    sensitivity=15
+    lower_blue=(120 - sensitivity,75, 50)
+    upper_blue=(120 + sensitivity, 255, 255)
+    #mask 1 to detect blue color and filter out blue region
+    mask=cv2.inRange(hsv,lower_blue,upper_blue)
+    #inverse mask to keep regions with blue and filter out rest
     mask_inv=cv2.bitwise_not(mask)
     
-    #foreground video frame.. green is filtered out using mask 1
+    #foreground video frame.. blue is filtered out using mask 1
     fg=cv2.bitwise_and(frame,frame,mask=mask_inv)
     
-    #still frame captured at first.. green region is kept and  rest is filtered out
+    #still frame captured at first.. blue region is kept and  rest is filtered out
     bg=cv2.bitwise_and(frame2,frame2,mask=mask)
     print("masked")
     
